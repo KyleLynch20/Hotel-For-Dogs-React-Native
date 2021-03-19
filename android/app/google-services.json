@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "495232481330",
+    "firebase_url": "https://hotelfordogs-2f77a-default-rtdb.firebaseio.com",
+    "project_id": "hotelfordogs-2f77a",
+    "storage_bucket": "hotelfordogs-2f77a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495232481330:android:9af936ee799a0192bb242b",
+        "android_client_info": {
+          "package_name": "com.example.hotel_for_dogs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495232481330-6pf03cq5pevsrl846tlph7uuvbvc39rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD54jnXDlx1ytLYOR928NKDUvzwJa4JH6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495232481330-6pf03cq5pevsrl846tlph7uuvbvc39rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495232481330:android:f8adf7fccec93c13bb242b",
+        "android_client_info": {
+          "package_name": "com.hotelfordogs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495232481330-6pf03cq5pevsrl846tlph7uuvbvc39rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD54jnXDlx1ytLYOR928NKDUvzwJa4JH6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495232481330-6pf03cq5pevsrl846tlph7uuvbvc39rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
