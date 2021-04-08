@@ -15,18 +15,24 @@ import {
 
 class Forum extends Component {
 
-  state = {
-    state: '',
-    city: '',
-    error: ' ',
-    typeOfPost: ' ',
-    searchHit: 0,
-    sitterPostHit: false,
-    needPostHit: false
-
+  constructor(props){
+    super(props);
+    console.log("in constructor : " + props.route.params.typeOfPost); 
+    this.state = {
+      state: '',
+      city: '',
+      error: ' ',
+      // look into passing the type of post when leave from need post or sitter post to correctly display the data..
+      typeOfPost: props.route.params.typeOfPost,
+      searchHit: 0,
+      sitterPostHit: false,
+      needPostHit: false
+    }
   }
 
-  onPress = () => {
+  
+
+  onPressSearch = () => {
     if (this.state.needPostHit) {
       this.setState({
         searchHit: this.state.searchHit + 1,
@@ -46,7 +52,6 @@ class Forum extends Component {
       sitterPostHit: true,
       needPostHit: false
     })
-
   }
 
 
@@ -57,12 +62,23 @@ class Forum extends Component {
     })     
   }
 
+  onPressPost = () => {
+    if (this.state.needPostHit && this.state.city !== '' && this.state.state !== '') { 
+      //this.props.navigation.pop();
+      //this.props.navigation.push('NeedPostForum', { email: this.props.route.params.email, state: this.state.state, city: this.state.city });
+      this.props.navigation.navigate('NeedPostForum', { email: this.props.route.params.email, state: this.state.state, city: this.state.city });
+    } else if (this.state.sitterPostHit && this.state.city !== '' && this.state.state !== '') {
+      //this.props.navigation.pop();
+      //this.props.navigation.push('SitterPostForum', { email: this.props.route.params.email, state: this.state.state, city: this.state.city });
+      this.props.navigation.navigate('SitterPostForum', { email: this.props.route.params.email, state: this.state.state, city: this.state.city });
+
+    }
+  }
+
   
 
  render() {
-  // this is important this is how I can get data from login
-  const fname = this.props.route.params.name;
-  console.log(fname);
+   //console.log("type of post " + this.state.typeOfPost);
     return (
       <View style={styles.container}>
         
@@ -117,7 +133,7 @@ class Forum extends Component {
 
             <TouchableOpacity
              style={styles.button2}
-             onPress={this.onPress}
+             onPress={this.onPressSearch}
             >
              <Text style={{color: "#1976D2"}}>Search</Text>
             </TouchableOpacity>
@@ -132,7 +148,7 @@ class Forum extends Component {
         
         <TouchableOpacity
         style={styles.button}
-        onPress={this.onPress}
+        onPress={this.onPressPost}
         >
         <Text style={{color: "#1976D2"}}>Post</Text>
         </TouchableOpacity>
@@ -176,7 +192,7 @@ function Component1(props) {
 
   useEffect(() => {
     getData();
-  }, [props.searchHit, props.typeOfPost])
+  }, [props.searchHit])
 
   if (loading) {
     return <ActivityIndicator />;

@@ -2,13 +2,15 @@ import * as React from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
-
   Button
 } from 'react-native';
 
 import Login from './components/Login';
 import Register from './components/Register';
 import Forum from './components/forum';
+import NeedPostForum from './components/NeedPostForum';
+import SitterPostForum from './components/SitterPostForum';
+
 
 
 const Stack = createStackNavigator();
@@ -48,20 +50,19 @@ export default class App extends React.Component {
       options={{ title: 'Hotel For Dogs', headerTintColor: "white"}}
       />
 
+      <Stack.Screen 
+      name="NeedPostForum" 
+      component={NeedPostForum} 
+      options={{ title: 'Hotel For Dogs', headerTintColor: "white"}}
+      />
+
+      <Stack.Screen 
+      name="SitterPostForum" 
+      component={SitterPostForum} 
+      options={{ title: 'Hotel For Dogs', headerTintColor: "white"}}
+      />
+
     </Stack.Navigator>
   </NavigationContainer>;
   }
 }
-
-
-// delete this 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <Button
-      title="Go to Jane's profile"
-      onPress={() =>
-        navigation.navigate('Profile', { name: 'Jane' })
-      }
-    />
-  );
-};

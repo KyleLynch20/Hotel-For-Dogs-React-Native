@@ -21,10 +21,10 @@ class Login extends Component {
 
   onPressLogin = () => {
     if (this.state.email !== '' && this.state.password !== '') {
-      auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      auth().signInWithEmailAndPassword(this.state.email.trim(), this.state.password.trim())
       .then(() => {
         console.log(this.state.email + " signed in!");
-        this.props.navigation.navigate('Forum', { name: 'Jane' });
+        this.props.navigation.navigate('Forum', { email: this.state.email, typeOfPost: ' ' });
       }).catch(error => {
         if (error.code === 'auth/email-already-in-use') {
           this.setState({
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: '#1976D2', 
     borderWidth: 1
-
   }
 })
 
