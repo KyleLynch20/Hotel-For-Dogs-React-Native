@@ -38,7 +38,7 @@ class Forum extends Component {
         searchHit: this.state.searchHit + 1,
         typeOfPost: 'sitterPosts'
       })
-    } else {
+    } else if (this.state.sitterPostHit) {
       this.setState({
         searchHit: this.state.searchHit + 1,
         typeOfPost: 'needPosts'
@@ -117,18 +117,19 @@ class Forum extends Component {
         </View>
 
         <View style={styles.row}>
-            <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "30%",  marginBottom: 10, marginTop: 10 }}
-            placeholder = "State"
-            onChangeText={(value) => this.setState({state: value})}
-            value={this.state.state}
-            />
-
+            
             <TextInput
             style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "30%",  marginBottom: 10, marginTop: 10 }}
             placeholder = "City"
             onChangeText={(value) => this.setState({city: value})}
             value={this.state.city}
+            />
+
+            <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "30%",  marginBottom: 10, marginTop: 10 }}
+            placeholder = "State"
+            onChangeText={(value) => this.setState({state: value})}
+            value={this.state.state}
             />
 
             <TouchableOpacity
@@ -171,8 +172,8 @@ function Component1(props) {
   const getData = async () => {
     const subscriber = await firestore()
     .collection(props.typeOfPost)
-    .where('state', "==", props.state)
-    .where('city', "==", props.city)
+    .where('state', "==", props.state.toLowerCase().trim())
+    .where('city', "==", props.city.toLowerCase().trim())
     .onSnapshot(querySnapshot => {
       const data = [];
 

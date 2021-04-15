@@ -56,8 +56,8 @@ class NeedPostForum extends Component {
     fullName: '',
     dogBio: '',
     email: this.props.route.params.email,
-    state: this.props.route.params.state,
-    city: this.props.route.params.city,
+    state: this.props.route.params.state.toLowerCase().trim(),
+    city: this.props.route.params.city.toLowerCase().trim(),
   }
 
   onPress = () => {

@@ -16,28 +16,39 @@ class Register extends Component {
   state = {
     email: '',
     password: '',
+    confirmPassword: '',
     error: ' '
   }
 
   onPress = () => {
     if (this.state.email !== '' && this.state.password !== '') {
-      auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => {
-        console.log('User account created!');
-        this.props.navigation.navigate('Login');
-      }).catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          this.setState({
-            error: 'That email address is already in use!'
+      if (this.state.confirmPassword === this.state.password) { 
+        auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => {
+          console.log('User account created!');
+          this.props.navigation.navigate('Login');
+        }).catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            this.setState({
+              error: 'That email address is already in use!'
             })
-        }
-        if (error.code === 'auth/invalid-email') {
-          this.setState({
+          }
+          else if (error.code === 'auth/invalid-email') {
+            this.setState({
             error: 'That email address is invalid!'
             })
-        }
-
-      });
+          }
+          else if(error.code === 'auth/weak-password') {
+            this.setState({
+              error: 'The password is too weak'
+            })
+          }
+        });
+      } else {
+        this.setState({
+          error: 'passwords do not match!'
+          })
+      }
     } else { 
       this.setState({
         error: 'All fields required!'
@@ -48,9 +59,6 @@ class Register extends Component {
  render() {
     return (
       <View style={styles.container}>
-        
-        
-
         <TextInput
           style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "80%",  marginBottom: 10, marginTop: 10 }}
           placeholder = "Email"
@@ -63,13 +71,15 @@ class Register extends Component {
           placeholder = "Password"
           onChangeText={(value) => this.setState({password: value})}
           value={this.state.password}
+          secureTextEntry={true}
         />
 
          <TextInput
           style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: "80%",  marginBottom: 10 }}
           placeholder = "Confirm Password"
-          onChangeText={(value) => this.setState({password: value})}
-          value={this.state.password}
+          onChangeText={(value) => this.setState({confirmPassword: value})}
+          value={this.state.confirmPassword}
+          secureTextEntry={true}
         />            
 
         <TouchableOpacity

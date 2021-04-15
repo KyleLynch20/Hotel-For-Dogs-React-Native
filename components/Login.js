@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Text,
   View,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
 
 class Login extends Component {
@@ -51,8 +52,8 @@ class Login extends Component {
 
  render() {
     return (
-      <View style={styles.container}>
-        
+      <ScrollView style={styles.container}>
+        <View style = {{alignItems: 'center'}}>
         <Image 
         style = {{width: 250, height: 250}}
         source = {require('./dog.gif')}
@@ -70,6 +71,7 @@ class Login extends Component {
           placeholder = "Password"
           onChangeText={(value) => this.setState({password: value})}
           value={this.state.password}
+          secureTextEntry={true}
         />        
 
         <TouchableOpacity
@@ -91,7 +93,8 @@ class Login extends Component {
             { this.state.error }
           </Text>
         </View>
-      </View>
+        </View>
+      </ScrollView>
     )
   }
 
@@ -101,7 +104,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
   },
   button: {
     alignItems: 'center',
