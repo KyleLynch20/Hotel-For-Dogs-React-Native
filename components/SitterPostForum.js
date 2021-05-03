@@ -47,9 +47,9 @@ function Post(props) {
   useEffect(() => {
     if (loading) {
       setData();
-      props.navigation.pop();
-      props.navigation.push('Forum', { email:  props.email, typeOfPost: ' '   });
-      //props.navigation.navigate('Forum', { email:  props.email, typeOfPost: 'sitterPosts'  });
+      //props.navigation.pop();
+      //props.navigation.push('Forum', { email:  props.email, typeOfPost: ' '   });
+      props.navigation.navigate('Forum', { email:  props.email, typeOfPost: ' '  });
       setLoading(false);
     }
   }, []);
@@ -75,7 +75,7 @@ class SitterPostForum extends Component {
   }
 
   errorCheck = () => {
-    var doublePatt = new RegExp("\\d+\\.\\d+");
+    var doublePatt = new RegExp("\\$\\d+(?:\\.\\d+)?");
     var phonePatt = new RegExp("^(\\d{3}[- .]?){2}\\d{4}$");
 
     if (this.state.title === '' || this.state.bio === '' || 

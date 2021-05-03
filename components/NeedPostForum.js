@@ -61,8 +61,9 @@ class NeedPostForum extends Component {
   }
 
   onPress = () => {
-    var doublePatt = new RegExp("\\d+\\.\\d+");
-    var intPatt = new RegExp("^[0-9]*[1-9][0-9]*$");
+    var doublePatt = new RegExp("\\$\\d+(?:\\.\\d+)?");
+    var intPatt = new RegExp("^[0-9]*[1-9][0-9]* hours$");
+    var intPatt2 = new RegExp("^[0-9]*[1-9][0-9]* Hours$");
     var phonePatt = new RegExp("^(\\d{3}[- .]?){2}\\d{4}$");
 
     if (this.state.title === '' || this.state.dogBreed === '' || 
@@ -85,9 +86,9 @@ class NeedPostForum extends Component {
       this.setState({
         error: 'Amount Per Hour must be a number with a decimal. Example: 10.50 or 10.0'
       })
-    } else if (intPatt.exec(this.state.amountOfTime) === null) {
+    } else if (intPatt.exec(this.state.amountOfTime) === null && intPatt2.exec(this.state.amountOfTime) === null) {
       this.setState({
-        error: 'Amount Of Time must be a number. Example: 24 or 48'
+        error: 'Amount Of Time must be a number followed by hours. Example: 24 hours or 48 Hours'
       })
     }  else if (phonePatt.exec(this.state.phoneNumber) === null) {
       this.setState({
@@ -100,10 +101,10 @@ class NeedPostForum extends Component {
       post (this.state.amountOfTime, this.state.amountPerHour, this.state.animalFriendly, this.state.city, this.state.dogBreed, 
            this.state.dogName, this.state.dogBio, this.state.email, this.state.fullName, this.state.phoneNumber, this.state.pottyTrained,
            this.state.state, this.state.title);
-      this.props.navigation.pop();
-      this.props.navigation.push('Forum', { email: this.state.email, typeOfPost: 'needPosts' });
+      //this.props.navigation.pop();
+      //this.props.navigation.push('Forum', { email: this.state.email, typeOfPost: 'needPosts' });
 
-      //this.props.navigation.navigate('Forum', { email: this.state.email, typeOfPost: 'needPosts' });
+      this.props.navigation.navigate('Forum', { email: this.state.email, typeOfPost: ' ' });
     }
     
   }

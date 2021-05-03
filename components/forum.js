@@ -22,7 +22,6 @@ class Forum extends Component {
       state: '',
       city: '',
       error: ' ',
-      // look into passing the type of post when leave from need post or sitter post to correctly display the data..
       typeOfPost: props.route.params.typeOfPost,
       searchHit: 0,
       sitterPostHit: false,
@@ -66,10 +65,24 @@ class Forum extends Component {
     if (this.state.needPostHit && this.state.city !== '' && this.state.state !== '') { 
       //this.props.navigation.pop();
       //this.props.navigation.push('NeedPostForum', { email: this.props.route.params.email, state: this.state.state, city: this.state.city });
+      this.setState({
+        typeOfPost: 'reset',
+        sitterPostHit: false,
+        needPostHit: false,
+        state: '',
+        city: ''
+      })
       this.props.navigation.navigate('NeedPostForum', { email: this.props.route.params.email, state: this.state.state, city: this.state.city });
     } else if (this.state.sitterPostHit && this.state.city !== '' && this.state.state !== '') {
       //this.props.navigation.pop();
       //this.props.navigation.push('SitterPostForum', { email: this.props.route.params.email, state: this.state.state, city: this.state.city });
+      this.setState({
+        typeOfPost: 'reset',
+        sitterPostHit: false,
+        needPostHit: false,
+        state: '',
+        city: ''
+      })
       this.props.navigation.navigate('SitterPostForum', { email: this.props.route.params.email, state: this.state.state, city: this.state.city });
 
     }
@@ -78,7 +91,6 @@ class Forum extends Component {
   
 
  render() {
-   //console.log("type of post " + this.state.typeOfPost);
     return (
       <View style={styles.container}>
         
@@ -153,12 +165,6 @@ class Forum extends Component {
         >
         <Text style={{color: "#1976D2"}}>Post</Text>
         </TouchableOpacity>
-  
-        <View>
-          <Text>
-            { this.state.error }
-          </Text>
-        </View>
       </View>
     )
   }
@@ -230,7 +236,7 @@ function Component1(props) {
       )}
   />
   )
-  } else {
+  } else if (props.typeOfPost === "sitterPosts") {
     return (
       <FlatList
       data={data}
@@ -259,6 +265,8 @@ function Component1(props) {
       )}
   />
   )
+  } else {
+    return (<Text style={{ fontWeight: 'bold', textAlign: 'center'}}>No Data</Text>)
   }
   
 }
@@ -336,6 +344,7 @@ const styles = StyleSheet.create({
   },
   postText: {
     paddingLeft: 15,
+    paddingRight: 15,
     paddingTop: 10
   },
 })
